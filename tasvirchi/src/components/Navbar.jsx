@@ -1,6 +1,7 @@
 import React from "react";
 import { Shield } from "lucide-react";
 import { COLORS } from "../styles/colors";
+import img_src from "../imgs/logo_tasvirchi.png";
 
 const Navbar = ({ currentPage, setCurrentPage }) => (
   <nav
@@ -9,7 +10,12 @@ const Navbar = ({ currentPage, setCurrentPage }) => (
   >
     <div className="max-w-7xl mx-auto flex justify-between items-center">
       <div className="flex items-center space-x-2">
-        <Shield className="w-8 h-8" style={{ color: COLORS.ACCENT_LIGHT }} />
+        <img
+          src={img_src}
+          alt="logo"
+          className="w-25 h-20"
+          style={{ color: COLORS.ACCENT_LIGHT }}
+        />
         <h1
           className="text-2xl font-bold"
           style={{ color: COLORS.ACCENT_LIGHT }}

@@ -1,18 +1,21 @@
 import React from "react";
 import { Shield, Upload, Play, Zap, BarChart3 } from "lucide-react";
 import { COLORS } from "../styles/colors";
-import mockData from "../api/mockDat";
-
+import { mockSampleVideo } from "../api/mockDat";
+import img_src from "../imgs/logo_tasvirchi.png";
 const HomePage = ({ setCurrentPage, setUploadedFile, handleMockAnalysis }) => (
   <div className="min-h-screen" style={{ background: COLORS.MAIN_GRADIENT }}>
     <div className="container mx-auto px-6 py-20 text-center">
-      <div className="mb-12">
-        <Shield
-          className="w-24 h-24 mx-auto mb-6"
+      <div className="mb-12 ">
+        <img
+          src={img_src}
+          alt="logo"
+          className="mx-auto img_hero"
           style={{ color: COLORS.ACCENT_LIGHT }}
         />
+
         <h1
-          className="text-6xl font-bold mb-6"
+          className="text-6xl font-bold mb-6 header_one"
           style={{ color: COLORS.ACCENT_LIGHT }}
         >
           Tasvirchi

@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import UploadPage from "./pages/UploadPage";
 import ProcessingPage from "./pages/ProcessingPage";
-import ResultsPage from "./pages/ResultsPage";
+import ResultsPage from "./pages/ResultPage";
 import AboutPage from "./pages/AboutPage";
 import { mockApiResponse, analyzeVideo } from "./api/mockDat";
 
