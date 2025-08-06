@@ -1,70 +1,174 @@
-# Getting Started with Create React App
+🛡️ Tasvirchi - Deepfake Detection System 🎥🔍
+Tasvirchi is an AI-powered deepfake detection system built for rapid video analysis and manipulation detection.
+The name "Tasvirchi" (Uzbek: 🎨 "one who creates images") reflects the app's mission — to see beyond visuals and expose fake content.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+🚀 Features
+⚡ Lightning Fast: AI pipeline processes videos in seconds
 
-## Available Scripts
+🎯 95% Accuracy: Industry-grade detection with detailed confidence metrics
 
-In the project directory, you can run:
+🔒 Privacy First: Videos processed securely, never stored
 
-### `npm start`
+📈 Interactive Timeline: Visual confidence levels across the video
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+🧠 Detailed Analysis: Face consistency, temporal anomalies, compression artifacts & more
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+🧩 Project Structure
+pgsql
+Copy
+Edit
+tasvirchi/
+├── public/
+│   ├── index.html
+│   └── assets/
+│       └── mock_heatmap.jpg
+├── src/
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   ├── FileUploader.jsx
+│   │   ├── ConfidenceGraph.jsx
+│   │   └── ProcessingSpinner.jsx
+│   ├── pages/
+│   │   ├── HomePage.jsx
+│   │   ├── UploadPage.jsx
+│   │   ├── ResultsPage.jsx
+│   │   ├── AboutPage.jsx
+│   │   └── ProcessingPage.jsx
+│   ├── api/
+│   │   └── mockData.js
+│   ├── styles/
+│   │   └── colors.js
+│   ├── App.jsx
+│   ├── index.js
+│   └── index.css
+├── package.json
+└── README.md
+⚙️ Installation
+bash
+Copy
+Edit
+git clone <repository-url>
+cd tasvirchi
+npm install
+npm start
+Visit 👉 http://localhost:3000
 
-### `npm test`
+🧪 Technologies Used
+⚛️ React 18 – Frontend UI
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+🎨 Tailwind CSS – Clean, responsive design
 
-### `npm run build`
+🔎 Lucide React – Icon set
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+📊 Recharts – Confidence timeline charts
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+🧬 Modern JavaScript (ES6+)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+🧭 Usage
+🏠 Home Page
+Landing view with highlights
 
-### `npm run eject`
+Quick access to upload or demo
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+📤 Upload Page
+Drag & drop interface
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Supports .mp4, .avi, .mov (max 100MB)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Real-time validation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+🧾 Results Page
+Main verdict with % confidence
 
-## Learn More
+Timeline graph + heatmap
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Video preview
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+⏳ Processing Page
+Real-time animation
 
-### Code Splitting
+Time tracking + spinner
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+📡 API Integration
+🔁 Currently uses mock data for demo.
+For production setup:
 
-### Analyzing the Bundle Size
+Replace mock API logic in src/api/mockData.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Add real HTTP calls to analyzeVideo()
 
-### Making a Progressive Web App
+Connect with live Deepfake Detection API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Handle all edge/error cases
 
-### Advanced Configuration
+🎨 Color Palette
+Purpose	Color	Hex
+Brand Primary	Dark Blue	#00276A
+Accent	Blue Gradient	#003785
+Background & Text	Cream	#FEF5E2
+Alerts	Red	#EF4444
+Warnings	Orange	#F59E0B
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+🛠️ Development Tips
+🧩 Adding Components
+Place in src/components/
 
-### Deployment
+Import shared colors from styles/colors.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Use Tailwind classes
 
-### `npm run build` fails to minify
+Maintain naming convention
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+🗂️ Pages
+All in src/pages/
+
+Props passed via App.jsx
+
+Consistent styling
+
+Mobile-first design
+
+🧪 Demo Features
+🎞️ Sample video playback
+
+⏱️ Simulated 3-second analysis
+
+📉 Interactive timeline chart
+
+🧭 Mobile/tablet/desktop support
+
+🌱 Future Enhancements
+🎥 Real-time video stream detection
+
+📁 Batch processing support
+
+🧑‍💼 User auth + detection history
+
+☁️ Cloud uploads (Google Drive, Dropbox)
+
+📱 Mobile app companion
+
+👥 Contributing
+Fork repo 🔀
+
+Create branch: git checkout -b feature/your-feature
+
+Make changes & test ✅
+
+Commit: git commit -m 'Add feature'
+
+Push: git push origin feature/your-feature
+
+Open PR 📩
+
+📄 License
+MIT License – see LICENSE for full details
+
+💬 Support
+💡 Found a bug? Have an idea?
+📩 Open an issue
+
+⚠️ Note
+This project is a hackathon prototype built with mock data. For real-world deployment, actual deepfake detection APIs and security protocols should be integrated.
+
+🎉 Tasvirchi – See the truth behind the image.
