@@ -14,36 +14,8 @@ The name "Tasvirchi" (Uzbek: 🎨 "one who creates images") reflects the app's m
 
 🧠 Detailed Analysis: Face consistency, temporal anomalies, compression artifacts & more
 
-🧩 Project Structure
-pgsql
-Copy
-Edit
-tasvirchi/
-├── public/
-│ ├── index.html
-│ └── assets/
-│ └── mock_heatmap.jpg
-├── src/
-│ ├── components/
-│ │ ├── Navbar.jsx
-│ │ ├── FileUploader.jsx
-│ │ ├── ConfidenceGraph.jsx
-│ │ └── ProcessingSpinner.jsx
-│ ├── pages/
-│ │ ├── HomePage.jsx
-│ │ ├── UploadPage.jsx
-│ │ ├── ResultsPage.jsx
-│ │ ├── AboutPage.jsx
-│ │ └── ProcessingPage.jsx
-│ ├── api/
-│ │ └── mockData.js
-│ ├── styles/
-│ │ └── colors.js
-│ ├── App.jsx
-│ ├── index.js
-│ └── index.css
-├── package.json
-└── README.md
+<img width="765" height="688" alt="image" src="https://github.com/user-attachments/assets/b386f5cc-b397-41c2-97b4-ae8eccd8d2dd" />
+
 ⚙️ Installation
 bash
 Copy
