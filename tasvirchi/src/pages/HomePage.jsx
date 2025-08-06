@@ -6,7 +6,7 @@ import img_src from "../imgs/logo_tasvirchi.png";
 const HomePage = ({ setCurrentPage, setUploadedFile, handleMockAnalysis }) => (
   <div className="min-h-screen" style={{ background: COLORS.MAIN_GRADIENT }}>
     <div className="container mx-auto px-6 py-20 text-center">
-      <div className="mb-12 ">
+      <div className="mb-12">
         <img
           src={img_src}
           alt="logo"
