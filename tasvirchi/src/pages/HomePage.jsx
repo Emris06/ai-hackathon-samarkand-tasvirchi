@@ -1,7 +1,7 @@
 import React from "react";
 import { Shield, Upload, Play, Zap, BarChart3 } from "lucide-react";
 import { COLORS } from "../styles/colors";
-import { mockSampleVideo } from "../api/mockData";
+import mockData from "../api/mockDat";
 
 const HomePage = ({ setCurrentPage, setUploadedFile, handleMockAnalysis }) => (
   <div className="min-h-screen" style={{ background: COLORS.MAIN_GRADIENT }}>
