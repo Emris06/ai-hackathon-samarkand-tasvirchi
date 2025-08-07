@@ -1,4 +1,5 @@
 🛡️ Tasvirchi - Deepfake Detection System 🎥🔍
+
 Tasvirchi is an AI-powered deepfake detection system built for rapid video analysis and manipulation detection.
 The name "Tasvirchi" (Uzbek: 🎨 "one who creates images") reflects the app's mission — to see beyond visuals and expose fake content.
 
@@ -13,36 +14,8 @@ The name "Tasvirchi" (Uzbek: 🎨 "one who creates images") reflects the app's m
 
 🧠 Detailed Analysis: Face consistency, temporal anomalies, compression artifacts & more
 
-🧩 Project Structure
-pgsql
-Copy
-Edit
-tasvirchi/
-├── public/
-│   ├── index.html
-│   └── assets/
-│       └── mock_heatmap.jpg
-├── src/
-│   ├── components/
-│   │   ├── Navbar.jsx
-│   │   ├── FileUploader.jsx
-│   │   ├── ConfidenceGraph.jsx
-│   │   └── ProcessingSpinner.jsx
-│   ├── pages/
-│   │   ├── HomePage.jsx
-│   │   ├── UploadPage.jsx
-│   │   ├── ResultsPage.jsx
-│   │   ├── AboutPage.jsx
-│   │   └── ProcessingPage.jsx
-│   ├── api/
-│   │   └── mockData.js
-│   ├── styles/
-│   │   └── colors.js
-│   ├── App.jsx
-│   ├── index.js
-│   └── index.css
-├── package.json
-└── README.md
+<img width="765" height="688" alt="image" src="https://github.com/user-attachments/assets/b386f5cc-b397-41c2-97b4-ae8eccd8d2dd" />
+
 ⚙️ Installation
 bash
 Copy
@@ -102,12 +75,12 @@ Connect with live Deepfake Detection API
 Handle all edge/error cases
 
 🎨 Color Palette
-Purpose	Color	Hex
-Brand Primary	Dark Blue	#00276A
-Accent	Blue Gradient	#003785
-Background & Text	Cream	#FEF5E2
-Alerts	Red	#EF4444
-Warnings	Orange	#F59E0B
+Purpose Color Hex
+Brand Primary Dark Blue #00276A
+Accent Blue Gradient #003785
+Background & Text Cream #FEF5E2
+Alerts Red #EF4444
+Warnings Orange #F59E0B
 
 🛠️ Development Tips
 🧩 Adding Components
