@@ -194,7 +194,7 @@ const HomePage = ({ setCurrentPage, setUploadedFile, handleMockAnalysis }) => {
             Upload Video
           </button>
 
-          <button
+          {/* <button
             onClick={() => {
               setUploadedFile(mockSampleVideo);
               handleMockAnalysis();
@@ -218,7 +218,7 @@ const HomePage = ({ setCurrentPage, setUploadedFile, handleMockAnalysis }) => {
           >
             <Play className="w-5 h-5 inline mr-2" />
             Try Sample Video
-          </button>
+          </button> */}
         </div>
 
         {/* Floating particles background effect */}

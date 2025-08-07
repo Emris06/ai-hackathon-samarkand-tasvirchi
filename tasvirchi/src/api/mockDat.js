@@ -11,7 +11,7 @@ export const mockApiResponse = {
     { time: 4, confidence: 0.88, timestamp: "00:04" },
     { time: 5, confidence: 0.95, timestamp: "00:05" },
   ],
-  processing_time: 2.3,
+  processing_time: 6.4,
   details: {
     face_consistency: 0.23,
     temporal_anomalies: 0.89,
@@ -28,7 +28,7 @@ export const mockSampleVideo = {
 // Simulated API call
 export const analyzeVideo = async (file) => {
   // Simulate processing time
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise((resolve) => setTimeout(resolve, 6000));
 
   return mockApiResponse;
 };

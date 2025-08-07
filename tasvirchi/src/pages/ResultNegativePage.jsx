@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { COLORS } from "../styles/colors";
 import ConfidenceGraph from "../components/ConfidenceGraph";
+import factchecknetLogo from "../imgs/factchecknet.png"; // Assuming you have a logo for factchecknet.uz
 
 const ResultsNegativePage = ({
   results,
@@ -41,8 +42,9 @@ const ResultsNegativePage = ({
         artifactsFound: Math.floor(Math.random() * 12) + 8, // 8-19 artifacts
       },
       {
-        name: "FaceForensics++",
-        icon: Cpu,
+        name: "factchecknet.uz",
+        icon: null, // No icon, will use image instead
+        image: factchecknetLogo, // Use the imported logo image
         confidence: generateRandomConfidence(),
         processingTime: generateRandomTime(),
         detectionMethod: "Temporal Inconsistency",
@@ -255,10 +257,21 @@ const ResultsNegativePage = ({
                 }}
               >
                 <div className="text-center mb-4">
-                  <IconComponent
-                    className="w-12 h-12 mx-auto mb-3"
-                    style={{ color: COLORS.ACCENT_LIGHT }}
-                  />
+                  {/* Conditionally render icon or image */}
+                  {module.image ? (
+                    <img
+                      src={module.image}
+                      alt={`${module.name} logo`}
+                      className="w-20 h-20 mx-auto mb-3 object-contain"
+                    />
+                  ) : (
+                    IconComponent && (
+                      <IconComponent
+                        className="w-12 h-12 mx-auto mb-3"
+                        style={{ color: COLORS.ACCENT_LIGHT }}
+                      />
+                    )
+                  )}
                   <h4
                     className="text-lg font-semibold"
                     style={{ color: COLORS.ACCENT_LIGHT }}
