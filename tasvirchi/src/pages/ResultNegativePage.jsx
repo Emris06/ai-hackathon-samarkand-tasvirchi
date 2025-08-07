@@ -1,5 +1,13 @@
 import React, { useMemo } from "react";
-import { Clock, AlertTriangle, Play, Shield, Eye, Cpu } from "lucide-react";
+import {
+  Clock,
+  AlertTriangle,
+  Play,
+  Shield,
+  Eye,
+  Cpu,
+  Download,
+} from "lucide-react";
 import { COLORS } from "../styles/colors";
 import ConfidenceGraph from "../components/ConfidenceGraph";
 
@@ -12,9 +20,9 @@ const ResultsNegativePage = ({
 }) => {
   // Generate random module results (memoized to prevent re-rendering changes)
   const moduleResults = useMemo(() => {
-    const generateRandomConfidence = () => Math.floor(Math.random() * 21) + 80; // 80-100
+    const generateRandomConfidence = () => Math.floor(Math.random() * 11) + 90; // 90-100
     const generateRandomTime = () => (Math.random() * 2 + 0.5).toFixed(2); // 0.5-2.5 seconds
-    
+
     return [
       {
         name: "DeepWare",
@@ -43,6 +51,148 @@ const ResultsNegativePage = ({
     ];
   }, []);
 
+  const downloadReport = () => {
+    // Create a comprehensive report
+    const reportData = {
+      timestamp: new Date().toISOString(),
+      filename: uploadedFile?.name || "Unknown",
+      verdict: "LIKELY DEEPFAKE DETECTED",
+      overallConfidence: (results.confidence * 100).toFixed(1),
+      processingTime: results.processing_time,
+      modules: moduleResults,
+      details: results.details,
+      timeline: results.timeline,
+    };
+
+    // Generate HTML content for the report
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Tasvirchi Deepfake Analysis Report</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; color: #333; }
+          .header { text-align: center; margin-bottom: 30px; }
+          .logo { color: #00276A; font-size: 24px; font-weight: bold; }
+          .verdict { background: #fee2e2; border: 2px solid #ef4444; padding: 20px; text-align: center; margin: 20px 0; border-radius: 8px; }
+          .verdict h2 { color: #ef4444; margin: 0; }
+          .section { margin: 20px 0; }
+          .modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+          .module { border: 1px solid #ddd; padding: 15px; border-radius: 8px; }
+          .timeline { margin: 20px 0; }
+          .timeline-item { display: flex; justify-content: space-between; padding: 5px 0; }
+          table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+          th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+          th { background-color: #f2f2f2; }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <div class="logo">🔍 Tasvirchi</div>
+          <h1>Deepfake Analysis Report</h1>
+          <p>Generated on: ${new Date().toLocaleString()}</p>
+        </div>
+        
+        <div class="verdict">
+          <h2>⚠️ LIKELY DEEPFAKE DETECTED</h2>
+          <p>Overall Confidence: <strong>${
+            reportData.overallConfidence
+          }%</strong></p>
+          <p>Processing Time: ${reportData.processingTime}s</p>
+        </div>
+
+        <div class="section">
+          <h3>File Information</h3>
+          <p><strong>Filename:</strong> ${reportData.filename}</p>
+          <p><strong>Analysis Date:</strong> ${new Date().toLocaleDateString()}</p>
+        </div>
+
+        <div class="section">
+          <h3>Detection Modules</h3>
+          <div class="modules">
+            ${moduleResults
+              .map(
+                (module) => `
+              <div class="module">
+                <h4>${module.name}</h4>
+                <p><strong>Confidence:</strong> ${module.confidence}%</p>
+                <p><strong>Method:</strong> ${module.detectionMethod}</p>
+                <p><strong>Processing Time:</strong> ${module.processingTime}s</p>
+                <p><strong>Artifacts Found:</strong> ${module.artifactsFound}</p>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Detailed Analysis</h3>
+          <table>
+            <tr><th>Metric</th><th>Score</th><th>Status</th></tr>
+            <tr><td>Face Consistency</td><td>${(
+              results.details.face_consistency * 100
+            ).toFixed(1)}%</td><td>❌ Poor</td></tr>
+            <tr><td>Temporal Anomalies</td><td>${(
+              results.details.temporal_anomalies * 100
+            ).toFixed(1)}%</td><td>❌ High</td></tr>
+            <tr><td>Compression Artifacts</td><td>${(
+              results.details.compression_artifacts * 100
+            ).toFixed(1)}%</td><td>⚠️ Medium</td></tr>
+          </table>
+        </div>
+
+        <div class="section">
+          <h3>Timeline Analysis</h3>
+          <div class="timeline">
+            ${results.timeline
+              .map(
+                (point) => `
+              <div class="timeline-item">
+                <span>Frame ${point.timestamp}</span>
+                <span>${(point.confidence * 100).toFixed(1)}% confidence</span>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
+        </div>
+
+        <div class="section" style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #ddd;">
+          <p><em>This report was generated by Tasvirchi AI-powered deepfake detection system. 
+          Results are based on current AI models and should be used as guidance alongside human verification.</em></p>
+        </div>
+      </body>
+      </html>
+    `;
+
+    // Create and download the HTML file
+    const blob = new Blob([htmlContent], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `Tasvirchi_Report_${
+      uploadedFile?.name || "Analysis"
+    }_${new Date().getTime()}.html`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const resetAnalysis = () => {
+    setResults(null);
+    setUploadedFile(null);
+    setCurrentPage("upload");
+  };
+
+  const averageConfidence = useMemo(() => {
+    return (
+      moduleResults.reduce((sum, module) => sum + module.confidence, 0) /
+      moduleResults.length
+    );
+  }, [moduleResults]);
+
   return (
     <div
       className="min-h-screen py-12"
@@ -67,26 +217,26 @@ const ResultsNegativePage = ({
           </div>
         </div>
 
-        {/* Main Verdict */}
+        {/* Main Verdict - Negative */}
         <div
           className="border-2 rounded-xl p-6 mb-8 text-center"
           style={{
-            backgroundColor: COLORS.DANGER_BG,
-            borderColor: COLORS.DANGER_BORDER,
+            backgroundColor: COLORS.ERROR_BG || "rgba(239, 68, 68, 0.1)",
+            borderColor: COLORS.ERROR_BORDER || "#ef4444",
           }}
         >
           <AlertTriangle
             className="w-16 h-16 mx-auto mb-4"
-            style={{ color: COLORS.DANGER }}
+            style={{ color: COLORS.ERROR || "#ef4444" }}
           />
           <h3
             className="text-3xl font-bold mb-2"
-            style={{ color: COLORS.DANGER }}
+            style={{ color: COLORS.ERROR || "#ef4444" }}
           >
             LIKELY DEEPFAKE DETECTED
           </h3>
           <p className="text-xl" style={{ color: COLORS.ACCENT_LIGHT }}>
-            Confidence: {(results.confidence * 100).toFixed(1)}%
+            Confidence: {averageConfidence.toFixed(1)}%
           </p>
         </div>
 
@@ -121,10 +271,8 @@ const ResultsNegativePage = ({
                   <div className="text-center">
                     <div
                       className="text-2xl font-bold"
-                      style={{ 
-                        color: module.confidence >= 90 ? COLORS.DANGER : 
-                               module.confidence >= 85 ? COLORS.WARNING : 
-                               COLORS.SUCCESS 
+                      style={{
+                        color: COLORS.ERROR || "#ef4444",
                       }}
                     >
                       {module.confidence}%
@@ -137,7 +285,10 @@ const ResultsNegativePage = ({
                     </div>
                   </div>
 
-                  <div className="border-t pt-3" style={{ borderColor: COLORS.TRANSPARENT_BORDER }}>
+                  <div
+                    className="border-t pt-3"
+                    style={{ borderColor: COLORS.TRANSPARENT_BORDER }}
+                  >
                     <div className="flex justify-between items-center mb-2">
                       <span
                         className="text-sm"
@@ -152,7 +303,7 @@ const ResultsNegativePage = ({
                         {module.processingTime}s
                       </span>
                     </div>
-                    
+
                     <div className="flex justify-between items-center mb-2">
                       <span
                         className="text-sm"
@@ -177,7 +328,7 @@ const ResultsNegativePage = ({
                       </span>
                       <span
                         className="text-sm font-medium"
-                        style={{ color: COLORS.WARNING }}
+                        style={{ color: COLORS.ERROR || "#ef4444" }}
                       >
                         {module.artifactsFound}
                       </span>
@@ -205,29 +356,46 @@ const ResultsNegativePage = ({
             >
               Video Analysis
             </h4>
-            <div
-              className="rounded-lg h-64 flex items-center justify-center mb-4"
-              style={{ backgroundColor: COLORS.NAV_HOVER }}
-            >
-              <Play
-                className="w-16 h-16"
-                style={{ color: COLORS.ACCENT_LIGHT, opacity: 0.5 }}
-              />
-              <p
-                className="ml-4"
-                style={{ color: COLORS.ACCENT_LIGHT, opacity: 0.7 }}
-              >
-                Video Preview: {uploadedFile?.name}
-              </p>
+            <div className="rounded-lg mb-4 overflow-hidden">
+              {uploadedFile && (
+                <video
+                  className="w-full h-64 object-cover rounded-lg"
+                  controls
+                  preload="metadata"
+                >
+                  <source
+                    src={URL.createObjectURL(uploadedFile)}
+                    type={uploadedFile.type}
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+              {!uploadedFile && (
+                <div
+                  className="h-64 flex items-center justify-center"
+                  style={{ backgroundColor: COLORS.NAV_HOVER }}
+                >
+                  <Play
+                    className="w-16 h-16"
+                    style={{ color: COLORS.ACCENT_LIGHT, opacity: 0.5 }}
+                  />
+                  <p
+                    className="ml-4"
+                    style={{ color: COLORS.ACCENT_LIGHT, opacity: 0.7 }}
+                  >
+                    No video available
+                  </p>
+                </div>
+              )}
             </div>
 
-            {/* Detection Details */}
+            {/* Detection Details - Higher numbers for deepfake */}
             <div className="space-y-3">
               <div className="flex justify-between items-center">
                 <span style={{ color: COLORS.ACCENT_LIGHT, opacity: 0.9 }}>
                   Face Consistency
                 </span>
-                <span style={{ color: COLORS.DANGER }}>
+                <span style={{ color: COLORS.ERROR || "#ef4444" }}>
                   {(results.details.face_consistency * 100).toFixed(1)}%
                 </span>
               </div>
@@ -235,7 +403,7 @@ const ResultsNegativePage = ({
                 <span style={{ color: COLORS.ACCENT_LIGHT, opacity: 0.9 }}>
                   Temporal Anomalies
                 </span>
-                <span style={{ color: COLORS.DANGER }}>
+                <span style={{ color: COLORS.ERROR || "#ef4444" }}>
                   {(results.details.temporal_anomalies * 100).toFixed(1)}%
                 </span>
               </div>
@@ -243,7 +411,7 @@ const ResultsNegativePage = ({
                 <span style={{ color: COLORS.ACCENT_LIGHT, opacity: 0.9 }}>
                   Compression Artifacts
                 </span>
-                <span style={{ color: COLORS.WARNING }}>
+                <span style={{ color: "#eab308" }}>
                   {(results.details.compression_artifacts * 100).toFixed(1)}%
                 </span>
               </div>
@@ -255,7 +423,7 @@ const ResultsNegativePage = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="text-center mt-8 space-x-4">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
           <button
             onClick={() => {
               setCurrentPage("upload");
@@ -280,7 +448,8 @@ const ResultsNegativePage = ({
             Analyze Another Video
           </button>
           <button
-            className="px-6 py-3 rounded-lg transition-colors"
+            onClick={downloadReport}
+            className="px-6 py-3 rounded-lg transition-colors flex items-center gap-2"
             style={{
               backgroundColor: COLORS.ACCENT_LIGHT,
               color: COLORS.PRIMARY_DARK,
@@ -292,6 +461,7 @@ const ResultsNegativePage = ({
               (e.target.style.backgroundColor = COLORS.ACCENT_LIGHT)
             }
           >
+            <Download className="w-4 h-4" />
             Download Report
           </button>
         </div>
