@@ -38,7 +38,8 @@ const App = () => {
   };
 
   // Check if uploaded file is "success.mp4" to determine which results page to show
-  const isPositiveResult = uploadedFile && uploadedFile.name === "success.mp4";
+  const isPositiveResult =
+    uploadedFile && uploadedFile.name === "futbol_2025.mp4";
 
   return (
     <div className="min-h-screen">
