@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Shield, Upload, Play, Zap, BarChart3 } from "lucide-react";
+import { Shield, Upload, FileText, Zap, BarChart3 } from "lucide-react";
 import { COLORS } from "../styles/colors";
-import { mockSampleVideo } from "../api/mockDat";
 import img_src from "../imgs/logo_tasvirchi.png";
 
 const HomePage = ({ setCurrentPage, setUploadedFile, handleMockAnalysis }) => {
@@ -41,7 +40,7 @@ const HomePage = ({ setCurrentPage, setUploadedFile, handleMockAnalysis }) => {
             Tasvirchi
           </h1>
 
-          {/* Subtitle - Removed shimmer effect */}
+          {/* Subtitle - Updated to include text analysis */}
           <div className={`${isLoaded ? "fade-in" : "opacity-0"}`}>
             <p
               className="text-xl mb-4 max-w-2xl mx-auto"
@@ -51,8 +50,9 @@ const HomePage = ({ setCurrentPage, setUploadedFile, handleMockAnalysis }) => {
                 animationDelay: "0.2s",
               }}
             >
-              Advanced AI-powered deepfake detection system. Analyze videos with
-              cutting-edge technology to identify manipulated content.
+              Advanced AI-powered deepfake detection system. Analyze videos and
+              text content with cutting-edge technology to identify manipulated
+              content.
             </p>
             <p
               className="text-sm mb-8 slide-in-top"
@@ -100,7 +100,8 @@ const HomePage = ({ setCurrentPage, setUploadedFile, handleMockAnalysis }) => {
               Lightning Fast
             </h3>
             <p style={{ color: COLORS.ACCENT_LIGHT, opacity: 0.8 }}>
-              Process videos in seconds with our optimized AI pipeline
+              Process videos and documents in seconds with our optimized AI
+              pipeline
             </p>
           </div>
 
@@ -162,12 +163,12 @@ const HomePage = ({ setCurrentPage, setUploadedFile, handleMockAnalysis }) => {
               Privacy First
             </h3>
             <p style={{ color: COLORS.ACCENT_LIGHT, opacity: 0.8 }}>
-              Your videos are processed securely and never stored
+              Your content is processed securely and never stored
             </p>
           </div>
         </div>
 
-        {/* Action Buttons - Removed ripple effect */}
+        {/* Action Buttons - Updated second button */}
         <div
           className={`flex flex-col sm:flex-row gap-4 justify-center ${
             isLoaded ? "bounce-in" : "opacity-0"
@@ -194,11 +195,8 @@ const HomePage = ({ setCurrentPage, setUploadedFile, handleMockAnalysis }) => {
             Upload Video
           </button>
 
-          {/* <button
-            onClick={() => {
-              setUploadedFile(mockSampleVideo);
-              handleMockAnalysis();
-            }}
+          <button
+            onClick={() => setCurrentPage("document-upload")}
             className="px-8 py-4 font-semibold rounded-xl shadow-lg transform hover:scale-105 transition-all duration-200 border-2 transform-gpu"
             style={{
               backgroundColor: "transparent",
@@ -216,9 +214,9 @@ const HomePage = ({ setCurrentPage, setUploadedFile, handleMockAnalysis }) => {
               e.target.style.transform = "scale(1) translateY(0)";
             }}
           >
-            <Play className="w-5 h-5 inline mr-2" />
-            Try Sample Video
-          </button> */}
+            <FileText className="w-5 h-5 inline mr-2" />
+            Upload Document
+          </button>
         </div>
 
         {/* Floating particles background effect */}

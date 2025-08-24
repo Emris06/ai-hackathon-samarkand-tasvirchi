@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import UploadPage from "./pages/UploadPage";
+import DocumentUploadPage from "./pages/DocumentUploadPage";
 import ProcessingPage from "./pages/ProcessingPage";
 import ResultsNegativePage from "./pages/ResultNegativePage";
 import ResultsPositivePage from "./pages/ResultPositivePage";
@@ -11,8 +12,10 @@ import { mockApiResponse, analyzeVideo } from "./api/mockDat";
 const App = () => {
   const [currentPage, setCurrentPage] = useState("home");
   const [uploadedFile, setUploadedFile] = useState(null);
+  const [uploadedDocument, setUploadedDocument] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [results, setResults] = useState(null);
+  const [documentResults, setDocumentResults] = useState(null);
 
   // Event Handlers
   const handleFileUpload = (event) => {
@@ -37,6 +40,12 @@ const App = () => {
     }
   };
 
+  const handleDocumentAnalysis = (analysisResult) => {
+    setDocumentResults(analysisResult);
+    // You can add additional logic here if needed
+    // For example, navigate to a document results page
+  };
+
   // Check if uploaded file is "success.mp4" to determine which results page to show
   const isPositiveResult =
     uploadedFile && uploadedFile.name === "futbol_2025.mp4";
@@ -57,6 +66,12 @@ const App = () => {
           onFileUpload={handleFileUpload}
           handleMockAnalysis={handleMockAnalysis}
           isProcessing={isProcessing}
+        />
+      )}
+      {currentPage === "document-upload" && (
+        <DocumentUploadPage
+          setCurrentPage={setCurrentPage}
+          onDocumentAnalysis={handleDocumentAnalysis}
         />
       )}
       {currentPage === "processing" && <ProcessingPage />}
